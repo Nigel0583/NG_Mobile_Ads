@@ -1,3 +1,9 @@
+## [2.2.8] - 2021-04-20
+
+### Added
+- GooglePlay - Google Play Billing Library version 3.0.3.
+  - Fixes a broken purchase flow when user resumed their app through the Android Launcher after interrupting an ongoing purchase. Now `IStoreListener.OnPurchaseFailed(PurchaseFailureDescription.reason: PurchaseFailureReason.UserCancelled)` is called on resumption. E.g. first the user initiates a purchase, then sees the Google purchasing dialog, and sends their app to the background via the device's Home key. They tap the app's icon in the Launcher, see no dialog, and, finally, the app will now receive this callback.
+
 ## [2.2.7] - 2021-01-27
 
 ### Changed
