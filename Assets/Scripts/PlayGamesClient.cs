@@ -1,7 +1,5 @@
 using GooglePlayGames;
 using GooglePlayGames.BasicApi;
-using UnityEngine.SocialPlatforms;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class PlayGamesClient : MonoBehaviour
@@ -50,4 +48,3 @@ public class PlayGamesClient : MonoBehaviour
         });
     }
 }
-//https://firebase.google.com/docs/auth/unity/play-games
