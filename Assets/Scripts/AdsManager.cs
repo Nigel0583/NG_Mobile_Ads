@@ -9,7 +9,7 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     private static AdsManager _adsInstance;
     private const string PlacementName = "rewardedVideo";
     private const string BannerName = "bannerAd";
-    
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -76,5 +76,4 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
             GameManager.Instance.RewardLives();
         }
     }
-
 }

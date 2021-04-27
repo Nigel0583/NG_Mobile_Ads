@@ -12,13 +12,13 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
     }
 
     public ItemType item;
-    private string defaultText;
+    private string _defaultText;
     public Text TextPrice;
-    
+
     private void Start()
     {
         StartCoroutine(LoadPriceRout());
-        defaultText = TextPrice.text;
+        _defaultText = TextPrice.text;
     }
 
     public void ClickBuy()
@@ -44,6 +44,6 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
             _ => throw new ArgumentOutOfRangeException()
         };
 
-        TextPrice.text = defaultText + " " + loadPrice;
+        TextPrice.text = _defaultText + " " + loadPrice;
     }
 }
