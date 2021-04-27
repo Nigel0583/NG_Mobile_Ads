@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Purchasing;
 
@@ -9,8 +10,9 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
 
 
     public string NoAds = "1no_ads";
-
-
+    public string ColorMod = "com.guerinnigel.shapeselector.colormod";
+    public Camera cam;
+    
     private void Start()
     {
         // If we haven't set up the Unity Purchasing reference
@@ -35,6 +37,7 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
 
         // Continue adding the non-consumable product.
         builder.AddProduct(NoAds, ProductType.NonConsumable);
+        builder.AddProduct(ColorMod, ProductType.NonConsumable);
 
 
         // Kick off the remainder of the set-up with an asynchronous call, passing the configuration 
@@ -96,48 +99,7 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
             Debug.Log("BuyProductID FAIL. Not initialized.");
         }
     }
-
-
-    // Restore purchases previously made by this customer. Some platforms automatically restore purchases, like Google. 
-    // Apple currently requires explicit purchase restoration for IAP, conditionally displaying a password prompt.
-    public void RestorePurchases()
-    {
-        // If Purchasing has not yet been set up ...
-        if (!IsInitialized())
-        {
-            // ... report the situation and stop restoring. Consider either waiting longer, or retrying initialization.
-            Debug.Log("RestorePurchases FAIL. Not initialized.");
-            return;
-        }
-
-        // If we are running on an Apple device ... 
-        if (Application.platform == RuntimePlatform.IPhonePlayer ||
-            Application.platform == RuntimePlatform.OSXPlayer)
-        {
-            // ... begin restoring purchases
-            Debug.Log("RestorePurchases started ...");
-
-            // Fetch the Apple store-specific subsystem.
-            var apple = _mStoreExtensionProvider.GetExtension<IAppleExtensions>();
-            // Begin the asynchronous process of restoring purchases. Expect a confirmation response in 
-            // the Action<bool> below, and ProcessPurchase if there are previously purchased products to restore.
-            apple.RestoreTransactions((result) =>
-            {
-                // The first phase of restoration. If no more responses are received on ProcessPurchase then 
-                // no purchases are available to be restored.
-                Debug.Log("RestorePurchases continuing: " + result +
-                          ". If no further messages, no purchases available to restore.");
-            });
-        }
-        // Otherwise ...
-        else
-        {
-            // We are not running on an Apple device. No work is necessary to restore purchases.
-            Debug.Log("RestorePurchases FAIL. Not supported on this platform. Current = " + Application.platform);
-        }
-    }
-
-
+    
     //  
     // --- IStoreListener
     //
@@ -166,6 +128,7 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
         //  a non-consumable product has been purchased by this user.
         if (string.Equals(args.purchasedProduct.definition.id, NoAds, StringComparison.Ordinal))
         {
+            Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             GameManager.Instance.RemoveAds();
         }
         // Or ... an unknown product has been purchased by this user. Fill in additional products here....
@@ -185,4 +148,17 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
         Debug.Log(
             $"OnPurchaseFailed: FAIL. Product: '{product.definition.storeSpecificId}', PurchaseFailureReason: {failureReason}");
     }
+    
+    public void OnPurchaseComplete(Product product)
+    {
+        if (product.definition.id != ColorMod) return;
+        Debug.Log("OnPurchaseComplete Testing");
+        ColorChange();
+    }
+
+    private void ColorChange()
+    {
+        cam.backgroundColor = Color.red;
+    }
+    
 }

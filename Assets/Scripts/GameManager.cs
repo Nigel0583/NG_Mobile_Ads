@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public GameObject rewardButton;
     public GameObject leaderButton;
     public GameObject achieveButton;
+    public GameObject colorButton;
     public Text txtLives;
     public float timeRemaining = 15;
     public bool timerIsRunning = false;
@@ -18,7 +19,6 @@ public class GameManager : Singleton<GameManager>
     public GameObject noLivesText;
     private bool _noAds = false;
     public GameObject noAdsButton;
-
     private static int CntLive { get; set; }
     private float _score = 0;
 
@@ -59,7 +59,6 @@ public class GameManager : Singleton<GameManager>
             else
             {
                 Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
-                // Firebase Unity SDK is not safe to use here.
             }
         });
     }
@@ -110,7 +109,8 @@ public class GameManager : Singleton<GameManager>
         achieveButton.SetActive(true);
         resetButton.SetActive(true);
         rewardButton.SetActive(true);
-        noAdsButton.SetActive(true);
+        noAdsButton.SetActive(_noAds == false);
+        colorButton.SetActive(true);
     }
 
     public void RewardLives()
