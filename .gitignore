@@ -8,6 +8,8 @@ Assets/Plugins/Editor/JetBrains*
 # Visual Studio Code
 .vscode/
 
+# Google Services (e.g. APIs or Firebase)
+google-services.json
 
 ### Unity ###
 [Ll]ibrary/
