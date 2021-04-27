@@ -2,11 +2,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
-public class AdsManager : MonoBehaviour, IUnityAdsListener
+public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
 {
     private const string GameId = "4102803";
     private bool _testMode = true;
-    private static AdsManager _adsInstance;
     private const string PlacementName = "rewardedVideo";
     private const string BannerName = "bannerAd";
 
@@ -23,9 +22,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
     }
 
-    private void Awake()
+    public override void Awake()
     {
-        _adsInstance = this;
     }
 
     private IEnumerator DisplayBannerReady()
@@ -44,10 +42,16 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         Advertisement.Banner.Hide();
     }
 
-    public void DisplayAds()
+    public void DisplayInterstitial()
     {
-        if (!Advertisement.IsReady()) return;
-        Advertisement.Show();
+        if (Advertisement.IsReady())
+        {
+            Advertisement.Show();
+        }
+        else
+        {
+            Debug.Log("Interstitial ad not ready at the moment! Please try again later!");
+        }
     }
 
     public void DisplayRewardAd()

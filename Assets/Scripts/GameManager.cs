@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
-    public static GameManager Instance { get; private set; }
     public GameObject resetButton;
     public GameObject getLivesButton;
     public GameObject rewardButton;
@@ -23,10 +22,8 @@ public class GameManager : MonoBehaviour
     private static int CntLive { get; set; }
     private float _score = 0;
 
-
-    private void Awake()
+    public override void Awake()
     {
-        Instance = this;
     }
 
     public void RemoveAds()
@@ -156,11 +153,12 @@ public class GameManager : MonoBehaviour
     {
         PlayGamesClient.UnlockAchievement(GPGSIds.achievement_clear_all);
     }
+
     public void ShowAchievements()
     {
         PlayGamesClient.ShowAchievementsUI();
     }
-     
+
     public void ShowLeaderboards()
     {
         PlayGamesClient.ShowLeaderboardsUI();
