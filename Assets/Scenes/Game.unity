@@ -2322,7 +2322,7 @@ GameObject:
   - component: {fileID: 1693046516}
   - component: {fileID: 1693046515}
   m_Layer: 0
-  m_Name: TEST
+  m_Name: PlayGamesAuth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
