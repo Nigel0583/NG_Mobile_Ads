@@ -517,7 +517,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2143763037}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: ShowLeaderboards
+        m_MethodName: ShowAchievements
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3374,6 +3374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa806e87f6d712b4bb77fee8eebe4538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 0
 --- !u!4 &1969567923
 Transform:
   m_ObjectHideFlags: 0
@@ -3708,6 +3709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a176691490c5e7544bcaa4bf2feb6917, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 0
   resetButton: {fileID: 1960310026}
   getLivesButton: {fileID: 2076765669}
   rewardButton: {fileID: 190114752}

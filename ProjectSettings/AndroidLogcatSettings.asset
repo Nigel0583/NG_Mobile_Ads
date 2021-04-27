@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R3CM505591M",
         "name": "com.GuerinNigel.ShapeSelect",
-        "processId": 31760,
+        "processId": 4852,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -30,6 +30,12 @@
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
             "processId": 31760,
+            "exited": false
+        },
+        {
+            "deviceId": "R3CM505591M",
+            "name": "com.GuerinNigel.ShapeSelect",
+            "processId": 4852,
             "exited": false
         }
     ],

@@ -8,6 +8,7 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
     private bool _testMode = true;
     private const string PlacementName = "rewardedVideo";
     private const string BannerName = "bannerAd";
+    private const string InterstitialName = "video";
 
     // Start is called before the first frame update
     private void Start()
@@ -44,9 +45,9 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
 
     public void DisplayInterstitial()
     {
-        if (Advertisement.IsReady())
+        if (Advertisement.IsReady(InterstitialName))
         {
-            Advertisement.Show();
+            Advertisement.Show(InterstitialName);
         }
         else
         {
