@@ -18,11 +18,6 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
         StartCoroutine(nameof(DisplayBannerReady));
     }
 
-    // Update is called once per frame
-    private void Update()
-    {
-    }
-
     public override void Awake()
     {
     }
