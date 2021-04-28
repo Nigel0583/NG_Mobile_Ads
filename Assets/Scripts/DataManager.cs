@@ -21,7 +21,6 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
     {
         StartCoroutine(LoadPriceRout());
         _defaultText = TextPrice.text;
-
     }
 
     public void ClickBuy()
@@ -54,21 +53,19 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
         while (!IAPManager.IsInitialized())
             yield return null;
 
-        ItemType loadPrice;
+        var loadPrice = "";
         switch (item)
         {
             case ItemType.NoAds:
-                IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
-                loadPrice = item;
+                loadPrice = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
                 break;
             case ItemType.ColorMod:
-                IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
-                loadPrice = item;
+                loadPrice = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        
+
         TextPrice.text = _defaultText + " " + loadPrice;
     }
 }
