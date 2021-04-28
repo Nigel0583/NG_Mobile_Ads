@@ -18,9 +18,12 @@ public class GameManager : Singleton<GameManager>
     public GameObject vicText;
     public GameObject noLivesText;
     private bool _noAds = false;
+    private bool _colors = false;
     public GameObject noAdsButton;
     private static int CntLive { get; set; }
     private float _score = 0;
+    private const float CycleSeconds = 100f;
+    public Camera cam;
 
     public override void Awake()
     {
@@ -30,6 +33,12 @@ public class GameManager : Singleton<GameManager>
     {
         _noAds = true;
         noAdsButton.SetActive(false);
+    }
+
+    public void AddColors()
+    {
+        _colors = true;
+        colorButton.SetActive(false);
     }
 
     public void Reset()
@@ -76,6 +85,16 @@ public class GameManager : Singleton<GameManager>
         {
             RemoveLives();
         }
+
+        if (PlayerPrefs.HasKey("colorMuch") == true)
+        {
+            //https://forum.unity.com/threads/rainbow-color-lerp-on-camera-bg.806688/
+            cam.backgroundColor = Color.HSVToRGB(
+                Mathf.Repeat(Time.time / CycleSeconds, 1f),
+                0.45f,
+                0.9f 
+            );
+        }
     }
 
 
@@ -109,8 +128,17 @@ public class GameManager : Singleton<GameManager>
         achieveButton.SetActive(true);
         resetButton.SetActive(true);
         rewardButton.SetActive(true);
-        noAdsButton.SetActive(_noAds == false);
-        colorButton.SetActive(true);
+        if (PlayerPrefs.HasKey("adsRemoved") == false)
+        {
+            Debug.Log("~~~~~~~~~~~~~~~~~~NO ADS  noAdsButton.SetActive(true);");
+            noAdsButton.SetActive(true);
+        }
+
+        if (PlayerPrefs.HasKey("colorMuch") == false)
+        {
+            Debug.Log("~~~~~~~~~~~~~~~~~~NO COLOR  colorButton.SetActive(true);");
+            colorButton.SetActive(true);
+        }
     }
 
     public void RewardLives()

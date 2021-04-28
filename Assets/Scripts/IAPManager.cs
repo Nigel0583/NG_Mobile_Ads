@@ -11,8 +11,7 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
 
     public string NoAds = "1no_ads";
     public string ColorMod = "com.guerinnigel.shapeselector.colormod";
-    public Camera cam;
-    
+
     private void Start()
     {
         // If we haven't set up the Unity Purchasing reference
@@ -57,6 +56,13 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
         // Buy the non-consumable product using its general identifier. Expect a response either 
         // through ProcessPurchase or OnPurchaseFailed asynchronously.
         BuyProductID(NoAds);
+    }
+    
+    public void BuyColor()
+    {
+        // Buy the non-consumable product using its general identifier. Expect a response either 
+        // through ProcessPurchase or OnPurchaseFailed asynchronously.
+        BuyProductID(ColorMod);
     }
 
     public string GetProductPriceFromStore(string id)
@@ -131,6 +137,11 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
             Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
             GameManager.Instance.RemoveAds();
         }
+        else if (string.Equals(args.purchasedProduct.definition.id, ColorMod, StringComparison.Ordinal))
+        {
+            Debug.Log($"ProcessPurchase: PASS. Product: '{args.purchasedProduct.definition.id}'");
+            GameManager.Instance.AddColors();
+        }
         // Or ... an unknown product has been purchased by this user. Fill in additional products here....
         else
         {
@@ -148,17 +159,4 @@ public class IAPManager : Singleton<IAPManager>, IStoreListener
         Debug.Log(
             $"OnPurchaseFailed: FAIL. Product: '{product.definition.storeSpecificId}', PurchaseFailureReason: {failureReason}");
     }
-    
-    public void OnPurchaseComplete(Product product)
-    {
-        if (product.definition.id != ColorMod) return;
-        Debug.Log("OnPurchaseComplete Testing");
-        ColorChange();
-    }
-
-    private void ColorChange()
-    {
-        cam.backgroundColor = Color.red;
-    }
-    
 }

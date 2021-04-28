@@ -15,7 +15,10 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
     {
         Advertisement.Initialize(GameId);
         Advertisement.AddListener(this);
-        StartCoroutine(nameof(DisplayBannerReady));
+        if (PlayerPrefs.HasKey("adsRemoved") == false)
+        {
+            StartCoroutine(nameof(DisplayBannerReady));
+        }
     }
 
     public override void Awake()
@@ -29,8 +32,10 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
             yield return new WaitForSeconds(0.5f);
         }
 
+        if (PlayerPrefs.HasKey("adsRemoved")) yield break;
         Advertisement.Banner.SetPosition(BannerPosition.BOTTOM_CENTER);
         Advertisement.Banner.Show(BannerName);
+
     }
 
     public static void HideBanner()
@@ -42,7 +47,10 @@ public class AdsManager : Singleton<AdsManager>, IUnityAdsListener
     {
         if (Advertisement.IsReady(InterstitialName))
         {
-            Advertisement.Show(InterstitialName);
+            if (PlayerPrefs.HasKey("adsRemoved") == false)
+            {
+                Advertisement.Show(InterstitialName);
+            }
         }
         else
         {

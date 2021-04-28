@@ -8,8 +8,10 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
 {
     public enum ItemType
     {
-        NoAds
+        NoAds,
+        ColorMod
     }
+
 
     public ItemType item;
     private string _defaultText;
@@ -19,6 +21,7 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
     {
         StartCoroutine(LoadPriceRout());
         _defaultText = TextPrice.text;
+
     }
 
     public void ClickBuy()
@@ -26,7 +29,20 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
         switch (item)
         {
             case ItemType.NoAds:
-                IAPManager.Instance.BuyNoAds();
+                if (PlayerPrefs.HasKey("adsRemoved") == false)
+                {
+                    PlayerPrefs.SetInt("adsRemoved", 0);
+                    IAPManager.Instance.BuyNoAds();
+                }
+
+                break;
+            case ItemType.ColorMod:
+                if (PlayerPrefs.HasKey("colorMuch") == false)
+                {
+                    PlayerPrefs.SetInt("colorMuch", 0);
+                    IAPManager.Instance.BuyColor();
+                }
+
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -38,12 +54,21 @@ public class RemoveAdsManager : Singleton<RemoveAdsManager>
         while (!IAPManager.IsInitialized())
             yield return null;
 
-        var loadPrice = item switch
+        ItemType loadPrice;
+        switch (item)
         {
-            ItemType.NoAds => IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds),
-            _ => throw new ArgumentOutOfRangeException()
-        };
-
+            case ItemType.NoAds:
+                IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
+                loadPrice = item;
+                break;
+            case ItemType.ColorMod:
+                IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
+                loadPrice = item;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+        
         TextPrice.text = _defaultText + " " + loadPrice;
     }
 }

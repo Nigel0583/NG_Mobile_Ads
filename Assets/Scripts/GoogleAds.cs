@@ -21,9 +21,13 @@ public class GoogleAds : MonoBehaviour
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize(initStatus => { });
         this._rewardedAd = new RewardedAd(ADUnitReward);
-        RequestBanner();
         RequestReward();
-        RequestInterstitial();
+        if (PlayerPrefs.HasKey("adsRemoved") == false)
+        {
+            RequestInterstitial();
+            RequestBanner();
+        }
+       
     }
 
     public void ShowReward()
@@ -51,21 +55,23 @@ public class GoogleAds : MonoBehaviour
     {
         while (!_interstitialAd.IsLoaded())
             yield return null;
-        _interstitialAd.Show();
+        if (PlayerPrefs.HasKey("adsRemoved") == false)
+        {
+            _interstitialAd.Show();
+        }
     }
 
     private void ShowInterAd()
     {
-        if (_timer <= 0)
-        {
-            StartCoroutine(ShowInterstitialIE());
-            _timer = 100.0f; //Amount of seconds
-        }
+        if (!(_timer <= 0)) return;
+        StartCoroutine(ShowInterstitialIE());
+        _timer = 100.0f; //Amount of seconds
     }
 
 
     private void RequestBanner()
     {
+        if (PlayerPrefs.HasKey("adsRemoved")) return;
         _bannerView = new BannerView(ADUnitBanner, AdSize.Banner, AdPosition.Top);
         var request = new AdRequest.Builder().Build();
         this._bannerView.LoadAd(request);
@@ -89,6 +95,7 @@ public class GoogleAds : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
+        if (PlayerPrefs.HasKey("adsRemoved")) return;
         _timer -= Time.deltaTime;
         ShowInterAd();
     }
