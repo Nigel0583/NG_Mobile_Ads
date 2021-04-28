@@ -1329,7 +1329,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1261639554}
-        m_TargetAssemblyTypeName: RemoveAdsManager, Assembly-CSharp
+        m_TargetAssemblyTypeName: PurchaseManager, Assembly-CSharp
         m_MethodName: ClickBuy
         m_Mode: 1
         m_Arguments:
@@ -1466,7 +1466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 824350198}
-  - component: {fileID: 824350197}
+  - component: {fileID: 824350196}
   m_Layer: 0
   m_Name: RemoveAdsManager
   m_TagString: Untagged
@@ -1474,7 +1474,7 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &824350197
+--- !u!114 &824350196
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1489,6 +1489,7 @@ MonoBehaviour:
   dontDestroy: 0
   item: 0
   TextPrice: {fileID: 1781195131}
+  TextPrice1: {fileID: 0}
 --- !u!4 &824350198
 Transform:
   m_ObjectHideFlags: 0
@@ -2524,7 +2525,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroy: 0
   item: 1
-  TextPrice: {fileID: 967319953}
+  TextPrice: {fileID: 0}
+  TextPrice1: {fileID: 967319953}
 --- !u!4 &1261639555
 Transform:
   m_ObjectHideFlags: 0
@@ -2877,7 +2879,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2143763037}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: RewardLives
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3343,8 +3345,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 824350197}
-        m_TargetAssemblyTypeName: RemoveAdsManager, Assembly-CSharp
+      - m_Target: {fileID: 824350196}
+        m_TargetAssemblyTypeName: PurchaseManager, Assembly-CSharp
         m_MethodName: ClickBuy
         m_Mode: 1
         m_Arguments:
