@@ -71,7 +71,7 @@ public class PurchaseManager : Singleton<PurchaseManager>
         loadPrice = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
         loadPrice1 = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
 
-        TextPrice.text = _defaultText + " " + loadPrice;
-        TextPrice1.text = _defaultText1 + " " + loadPrice1;
+        TextPrice.text =  "No ads: " + loadPrice;
+        TextPrice1.text =  "Color Background: " + loadPrice1;
     }
 }

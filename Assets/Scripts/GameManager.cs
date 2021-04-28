@@ -24,6 +24,7 @@ public class GameManager : Singleton<GameManager>
     private float _score = 0;
     private const float CycleSeconds = 100f;
     public Camera cam;
+    public GameObject panel;
 
     public override void Awake()
     {
@@ -170,6 +171,14 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public void OpenPanel()
+    {
+        if (panel != null)
+        {
+            var isActive = panel.activeSelf;
+            panel.SetActive(!isActive);
+        }
+    }
     private static void UnlockMoreLives()
     {
         PlayGamesClient.UnlockAchievement(GPGSIds.achievement_get_more_lives);
