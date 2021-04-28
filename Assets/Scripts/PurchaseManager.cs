@@ -13,6 +13,7 @@ public class PurchaseManager : Singleton<PurchaseManager>
     }
 
     public ItemType item;
+    public ItemType item1;
     private string _defaultText;
     public Text TextPrice;
     private string _defaultText1;
@@ -25,7 +26,7 @@ public class PurchaseManager : Singleton<PurchaseManager>
         _defaultText1 = TextPrice1.text;
     }
 
-    public void ClickBuy()
+    public void ClickBuyNoAds()
     {
         switch (item)
         {
@@ -37,6 +38,15 @@ public class PurchaseManager : Singleton<PurchaseManager>
                 }
 
                 break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    public void ClickBuyColor()
+    {
+        switch (item1)
+        {
             case ItemType.ColorMod:
                 if (PlayerPrefs.HasKey("colorMuch") == false)
                 {
@@ -57,17 +67,9 @@ public class PurchaseManager : Singleton<PurchaseManager>
 
         var loadPrice = "";
         var loadPrice1 = "";
-        switch (item)
-        {
-            case ItemType.NoAds:
-                loadPrice = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
-                break;
-            case ItemType.ColorMod:
-                loadPrice1 = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
+
+        loadPrice = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.NoAds);
+        loadPrice1 = IAPManager.Instance.GetProductPriceFromStore(IAPManager.Instance.ColorMod);
 
         TextPrice.text = _defaultText + " " + loadPrice;
         TextPrice1.text = _defaultText1 + " " + loadPrice1;

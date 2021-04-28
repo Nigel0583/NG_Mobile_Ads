@@ -128,15 +128,13 @@ public class GameManager : Singleton<GameManager>
         achieveButton.SetActive(true);
         resetButton.SetActive(true);
         rewardButton.SetActive(true);
-        if (PlayerPrefs.HasKey("adsRemoved") == false)
+        if (PlayerPrefs.HasKey("adsRemoved") == false || _noAds == false)
         {
-            Debug.Log("~~~~~~~~~~~~~~~~~~NO ADS  noAdsButton.SetActive(true);");
             noAdsButton.SetActive(true);
         }
 
-        if (PlayerPrefs.HasKey("colorMuch") == false)
+        if (PlayerPrefs.HasKey("colorMuch") == false  || _colors == false)
         {
-            Debug.Log("~~~~~~~~~~~~~~~~~~NO COLOR  colorButton.SetActive(true);");
             colorButton.SetActive(true);
         }
     }

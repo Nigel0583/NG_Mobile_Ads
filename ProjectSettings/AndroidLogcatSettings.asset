@@ -1,9 +1,9 @@
 {
     "m_SelectedDeviceId": "R3CM505591M",
     "m_SelectedPackage": {
-        "deviceId": "R3CM505591M",
-        "name": "com.GuerinNigel.ShapeSelect",
-        "processId": 28102,
+        "deviceId": "",
+        "name": "",
+        "processId": 0,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -17,44 +17,32 @@
         {
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 4852,
+            "processId": 6111,
             "exited": true
         },
         {
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 20203,
+            "processId": 8407,
             "exited": true
         },
         {
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 25017,
+            "processId": 12812,
             "exited": true
         },
         {
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 31790,
+            "processId": 13811,
             "exited": true
         },
         {
             "deviceId": "R3CM505591M",
             "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 13115,
+            "processId": 22821,
             "exited": true
-        },
-        {
-            "deviceId": "R3CM505591M",
-            "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 20499,
-            "exited": false
-        },
-        {
-            "deviceId": "R3CM505591M",
-            "name": "com.GuerinNigel.ShapeSelect",
-            "processId": 28102,
-            "exited": false
         }
     ],
     "m_Tags": {
